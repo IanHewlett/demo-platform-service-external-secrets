@@ -1,0 +1,25 @@
+installCRDs: true
+leaderElect: true
+nodeSelector:
+  nodegroup: "management-nodes"
+tolerations:
+  - key: "dedicated"
+    operator: "Equal"
+    value: "management"
+    effect: "NoSchedule"
+certController:
+  nodeSelector:
+    nodegroup: "management-nodes"
+  tolerations:
+    - key: "dedicated"
+      operator: "Equal"
+      value: "management"
+      effect: "NoSchedule"
+webhook:
+  nodeSelector:
+    nodegroup: "management-nodes"
+  tolerations:
+    - key: "dedicated"
+      operator: "Equal"
+      value: "management"
+      effect: "NoSchedule"

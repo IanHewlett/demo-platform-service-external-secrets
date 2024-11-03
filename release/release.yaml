@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-secrets
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: external-secrets
+      repoURL: https://charts.external-secrets.io
+      targetRevision: v0.9.7
+      helm:
+        releaseName: external-secrets
+        valueFiles:
+        - $values/release/values.yaml
+    - repoURL: https://github.com/IanHewlett/demo-platform-service-external-secrets.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
