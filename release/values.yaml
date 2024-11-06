@@ -1,25 +1,73 @@
 installCRDs: true
 leaderElect: true
+
+replicaCount: 3
+
 nodeSelector:
   nodegroup: "management-nodes"
+
 tolerations:
   - key: "dedicated"
     operator: "Equal"
     value: "management"
     effect: "NoSchedule"
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 50Mi
+  limits:
+    cpu: 100m
+    memory: 1Gi
+
 certController:
+  replicaCount: 3
+
   nodeSelector:
     nodegroup: "management-nodes"
+
   tolerations:
     - key: "dedicated"
       operator: "Equal"
       value: "management"
       effect: "NoSchedule"
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 50Mi
+    limits:
+      cpu: 100m
+      memory: 1Gi
+
 webhook:
+  replicaCount: 3
+
   nodeSelector:
     nodegroup: "management-nodes"
+
   tolerations:
     - key: "dedicated"
       operator: "Equal"
       value: "management"
       effect: "NoSchedule"
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 50Mi
+    limits:
+      cpu: 100m
+      memory: 1Gi
