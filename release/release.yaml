@@ -4,8 +4,12 @@ kind: Application
 metadata:
   name: external-secrets
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
 spec:
   project: default
+
   sources:
     - chart: external-secrets
       repoURL: https://charts.external-secrets.io
@@ -17,9 +21,11 @@ spec:
     - repoURL: https://github.com/IanHewlett/demo-platform-service-external-secrets.git
       targetRevision: main
       ref: values
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kube-system
+
   syncPolicy:
     automated:
       selfHeal: true
