@@ -12,4 +12,4 @@ patches:
       - op: add
         path: /spec/sources/0/helm/valueFiles/-
         value:
-          $values/environments/local/values.yaml
+          $values/environments/local/external-secrets/values.yaml
