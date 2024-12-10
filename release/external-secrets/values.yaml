@@ -1,6 +1,13 @@
 installCRDs: true
 leaderElect: true
 
+#serviceMonitor:
+#  enabled: true
+
+#metrics:
+#  service:
+#    enabled: true
+
 replicaCount: 3
 
 nodeSelector:

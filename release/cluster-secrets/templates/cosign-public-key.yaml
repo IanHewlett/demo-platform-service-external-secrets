@@ -1,0 +1,21 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterExternalSecret
+metadata:
+  name: cosign-signing-key
+spec:
+  externalSecretName: "cosign-signing-key"
+  refreshTime: "1m"
+  namespaceSelector: {}
+  externalSecretSpec:
+    secretStoreRef:
+      name: vault-admin
+      kind: ClusterSecretStore
+    target:
+      name: "cosign-signing-key"
+      creationPolicy: Owner
+    data:
+      - secretKey: "cosign.pub"
+        remoteRef:
+          key: "secret/svc/cosign"
+          property: "pub_key"
